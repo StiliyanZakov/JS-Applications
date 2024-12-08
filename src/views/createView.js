@@ -8,16 +8,15 @@ const template = () => {
     return html`
         <section id="create">
             <div class="form form-item">
-                <h2>Share Your item</h2>
+                <h2>Add Drone Offer</h2>
                 <form @submit=${handleFormSubmit} class="create-form">
-                    <input type="text" name="item" id="item" placeholder="Item" />
-                    <input type="text" name="imageUrl" id="item-image" placeholder="Your item Image URL" />
-                    <input type="text" name="price" id="price" placeholder="Price in Euro" />
-                    <input type="text" name="availability" id="availability"
-                        placeholder="Availability Information" />
-                    <input type="text" name="type" id="type" placeholder="Item Type" />
-                    <textarea id="description" name="description" placeholder="More About The Item" rows="10"
-                        cols="50"></textarea>
+                    <input type="text" name="model" id="model" placeholder="Drone Model" />
+                    <input type="text" name="imageUrl" id="imageUrl" placeholder="Image URL" />
+                    <input type="number" name="price" id="price" placeholder="Price" />
+                    <input type="number" name="weight" id="weight" placeholder="Weight" />
+                    <input type="number" name="phone" id="phone" placeholder="Phone Number for Contact" />
+                    <input type="text" name="condition" id="condition" placeholder="Condition" />
+                    <textarea name="description" id="description" placeholder="Description"></textarea>
                     <button type="submit">Add</button>
                 </form>
             </div>
@@ -32,12 +31,12 @@ export const renderCreate = () => {
 const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const { item, imageUrl, price, availability, type, description } = Object.fromEntries(
+    const { model, imageUrl, price, weight, phone, condition, description } = Object.fromEntries(
         new FormData(e.currentTarget)  
     );
 
     try {
-        if (item === "" || imageUrl === "" || price === "" || availability === "" || type === "" || description === "") {
+        if (model === "" || imageUrl === "" || price === "" || weight === "" || phone === "" || condition === "" || description === "") {
             throw new Error("All fields are required!");
         }
 
@@ -47,14 +46,14 @@ const handleFormSubmit = async (e) => {
                 "Content-Type": "application/json",
                 "X-Authorization": localStorage.getItem("accessToken"),
             },
-            body: JSON.stringify({ item, imageUrl, price, availability, type, description }),
+            body: JSON.stringify({ model, imageUrl, price, weight, phone, condition, description }),
         });
 
         if (!res.ok) {
             throw new Error(res.status);
         }
         
-        page.redirect("/market");
+        page.redirect("/dashboard");
     }
     catch (err) {
         console.error(err);

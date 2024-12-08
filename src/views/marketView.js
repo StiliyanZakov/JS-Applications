@@ -5,29 +5,27 @@ const rootEl = document.querySelector("#main-element");
 
 const template = (data) => {
     return html`
-        <h3 class="heading">Market</h3>
+        <h3 class="heading">Marketplace</h3>
             <section id="dashboard">
                 ${
                     data.length > 0 ?
                     html`
                         ${
                             data.map(item => html`
-                                <div class="item">
+                                <div class="drone">
                                     <img src=${item.imageUrl} alt=${item._id} />
-                                    <h3 class="model">${item.item}</h3>
-                                    <div class="item-info">
-                                        <p class="price">Price: €${item.price}</p>
-                                        <p class="availability">
-                                            ${item.availability}
-                                        </p>
-                                        <p class="type">Type: ${item.type}</p>
+                                    <h3 class="model">${item.model}</h3>
+                                    <div class="drone-info">
+                                        <p class="price">Price: ${item.price}</p>
+                                        <p class="condition">Condition: ${item.condition}</p>
+                                        <p class="weight">Weight: ${item.weight}g</p>
                                     </div>
-                                    <a @click=${(e) => handleDetailsClick(e, item._id)} class="details-btn" href="#">Uncover More</a>
+                                    <a @click=${(e) => handleDetailsClick(e, item._id)} class="details-btn" href="#">Details</a>
                                 </div>
                             `)
                         }
                     ` :
-                    html`<h3 class="empty">No Items Yet</h3>`
+                    html`<h3 class="no-drones">No Drones Available</h3>`
                 }
             </section>
     `;
@@ -53,5 +51,5 @@ const getItems = async () => {
 const handleDetailsClick = async (e, itemId) => {
     e.preventDefault();
     
-    page.redirect(`/market/${itemId}`);
+    page.redirect(`/dashboard/${itemId}`);
 }

@@ -8,14 +8,15 @@ const template = (data) => {
     return html`
         <section id="edit">
             <div class="form form-item">
-                <h2>Edit Your Item</h2>
+                <h2>Edit Offer</h2>
                 <form @submit=${(e) => editItem(e, data._id)} class="edit-form">
-                    <input type="text" name="item" id="item" placeholder="Item" value=${data.item} />
-                    <input type="text" name="imageUrl" id="item-image" placeholder="Your item Image URL" value=${data.imageUrl} />
-                    <input type="text" name="price" id="price" placeholder="Price in Euro" value=${data.price} />
-                    <input type="text" name="availability" id="availability" placeholder="Availability Information" value=${data.availability} />
-                    <input type="text" name="type" id="type" placeholder="Item Type" value=${data.type} />
-                    <textarea id="description" name="description" placeholder="More About The Item" rows="10" cols="50">${data.description}</textarea>
+                    <input type="text" name="model" id="model" placeholder="Drone Model" value=${data.model} />
+                    <input type="text" name="imageUrl" id="imageUrl" placeholder="Image URL" value=${data.imageUrl} />
+                    <input type="number" name="price" id="price" placeholder="Price" value=${data.price} />
+                    <input type="number" name="weight" id="weight" placeholder="Weight" value=${data.weight} />
+                    <input type="number" name="phone" id="phone" placeholder="Phone Number for Contact" value=${data.phone} />
+                    <input type="text" name="condition" id="condition" placeholder="Condition" value=${data.condition} />
+                    <textarea name="description" id="description" placeholder="Description">${data.description}</textarea>
                     <button type="submit">Edit</button>
                 </form>
             </div>
@@ -44,12 +45,12 @@ const getTeamData = async (id) => {
 const editItem = async (e, itemId) => {
     e.preventDefault();
 
-    const { item, imageUrl, price, availability, type, description } = Object.fromEntries(
+    const { model, imageUrl, price, weight, phone, condition, description } = Object.fromEntries(
         new FormData(e.currentTarget)  
     );
 
     try {
-        if (item === "" || imageUrl === "" || price === "" || availability === "" || type === "" || description === "") {
+        if (model === "" || imageUrl === "" || price === "" || weight === "" || phone === "" || condition === "" || description === "") {
             throw new Error("All fields are required!");
         }
 
@@ -59,14 +60,14 @@ const editItem = async (e, itemId) => {
                 "Content-Type": "application/json",
                 "X-Authorization": localStorage.getItem("accessToken"),
             },
-            body: JSON.stringify({ item, imageUrl, price, availability, type, description }),
+            body: JSON.stringify({ model, imageUrl, price, weight, phone, condition, description }),
         });
 
         if (!res.ok) {
             throw new Error(res.status);
         }
         
-        page.redirect(`/market/${itemId}`);
+        page.redirect(`/dashboard/${itemId}`);
     }
     catch (err) {
         console.error(err);

@@ -4,24 +4,28 @@
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    margin-top: 1em;
-    clip-path: polygon(7% 0, 100% 0, 100% 20%, 100% 59%, 93% 100%, 20% 100%, 0 100%, 0 43%);
+   
 }
 
 
 .notification {
     font-size: 1.5em;
-    color: #ffffff;
+    color: #000000;
     display: none;
     text-align: right;
+   
 }
 
 .notification>span {
     display: inline-block;
     padding:  0.5em 2em 0.5em 2em;
-    border-radius: 2px;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    box-shadow: 8px 8px 5px 4px rgba(0,0,0,0.75);
 }
 
 #errorBox>span {
-    background: rgb(199, 9, 216);
+    background: rgb(255, 255, 255);
 }

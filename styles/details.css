@@ -3,9 +3,8 @@
   margin: auto;
   height: 70vh;
   width: 70vw;
-  background: rgb(3,3,3);
-  background: radial-gradient(circle, rgba(3,3,3,0.15449929971988796) 24%, rgba(0,0,0,1) 87%);
-  clip-path: polygon(15% 0%, 100% 0, 100% 20%, 100% 80%, 85% 100%, 20% 100%, 0 100%, 0% 20%);
+ background-image: url(../images/pattern.png);
+  border-radius: 20px;
   padding-bottom: 10px;
   display: flex;
   justify-content: center;
@@ -15,26 +14,31 @@
 
 #details-wrapper img {
   display: block;
-  height: 35vh;
-  width: 40vh;
+  height:auto;
+  width: 45vh;
   border-radius: 3px;
-  border: 2px solid rgb(238, 0, 143) ;
+  border: 2px solid rgb(0, 0, 0) ;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
-#details-title {
+#details-model {
   text-align: center;
   font-weight: bold;
-  color: white;
-  text-shadow: 1px 1px rgb(238, 0, 143);
-  letter-spacing: 5px;
+  color: rgb(255, 255, 255);
+  background-color: black;
+  border-radius: 10px;
+  letter-spacing: 2px;
 }
 #details-description {
   width: 95%;
   margin: 30px auto;
-  height: auto;
+  height: 60%;
   text-align: center;
+  background-color: black;
+  padding: 5px;
+  border-radius: 10px;
 }
-#details-title {
+#details-model {
   font-size: 22px;
 }
 
@@ -44,7 +48,6 @@ p {
   text-align: center;
   font-size: 22px;
   color: #ffffff;
-text-shadow: 1px 1px black;
 letter-spacing: 1px;
 }
 
@@ -52,14 +55,14 @@ span {
   font-size: 22px;
 }
 
-#action-buttons {
+.buttons {
   display: flex;
   justify-content: center;
-  margin-bottom: 5px;
+  margin-top: -25px;
   
 }
 
-#action-buttons a {
+.buttons a {
   text-decoration: none;
   margin: auto 50px;
   margin-bottom: 10px;
@@ -70,7 +73,11 @@ span {
   background: rgb(16, 174, 214);
   border-radius: 5px;
 }
-#action-buttons a:hover {
-  background: #ffffff;
-  color: black;
+.buttons a:hover {
+  background: #2d48a0;
+  color: rgb(255, 255, 255);
+}
+
+.phone-number{
+  color: rgb(216, 219, 44);
 }

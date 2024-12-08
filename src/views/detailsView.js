@@ -8,7 +8,7 @@ const template = (itemData) => {
     const isOwner = itemData._ownerId === localStorage.getItem("userId");
 
     const actionButtons = html`
-        <div id="action-buttons">
+        <div class="buttons">
             <a @click=${(e) => handleEditClick(e, itemData._id)} href="" id="edit-btn">Edit</a>
             <a @click=${(e) => deleteItem(e, itemData._id)} href="" id="delete-btn">Delete</a>
         </div>
@@ -19,16 +19,15 @@ const template = (itemData) => {
             <div id="details-wrapper">
                 <div>
                     <img id="details-img" src=${itemData.imageUrl} alt=${itemData._id} />
-                    <p id="details-title">${itemData.item}</p>
+                    <p id="details-model">${itemData.model}</p>
                 </div>
                 <div id="info-wrapper">
                     <div id="details-description">
                         <p class="details-price">Price: €${itemData.price}</p>
-                        <p class="details-availability">
-                            ${itemData.availability}
-                        </p>
-                        <p class="type">Type: ${itemData.type}</p>
-                        <p id="item-description">${itemData.description}</p>
+                        <p class="details-condition">Condition: ${itemData.condition}</p>
+                        <p class="details-weight">Weight: ${itemData.weight}g</p>
+                        <p class="drone-description">${itemData.description}</p>
+                        <p class="phone-number">Phone: ${itemData.phone}</p>
                     </div>
                     ${isOwner ? actionButtons : ""}
                 </div>
@@ -71,7 +70,7 @@ const deleteItem = async (e, itemId) => {
                 throw new Error(res.status);
             }
 
-            page.redirect("/market");
+            page.redirect("/dashboard");
         }
         catch (error) {
             console.error("Error:", error);
@@ -84,5 +83,5 @@ const deleteItem = async (e, itemId) => {
 const handleEditClick = async (e, itemId) => {
     e.preventDefault();
 
-    page.redirect(`/market/edit/${itemId}`);
+    page.redirect(`/dashboard/edit/${itemId}`);
 }

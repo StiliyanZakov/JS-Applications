@@ -1,13 +1,28 @@
-import { signOut } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
-import { auth } from '../config/firebaseInit.js';
-import page from '../lib/page.js';
+import { page } from "../../modules/modules.js";
+import { endpoints } from "../../api/endpoints.js";
+import { displayErrorMessage } from "../../modules/helpers.js";
 
-export default async function (ctx) {
+const rootEl = document.querySelector("#main-element");
+
+export const renderLogout = async () => {
     try {
-        await signOut(auth);
-        
-        page.redirect('/');
-    } catch (err) {
-        console.log(err.message);
+        const res = await fetch(endpoints.logout, {
+            method: "GET",
+            headers: {
+                "x-Authorization": localStorage.getItem("accessToken")
+            }
+        });
+
+        if (!res.ok) {
+            throw new Error(res.status);
+        }
+
+        localStorage.clear();
+        page.redirect("/");
+    }
+    catch (error) {
+        console.error("Error:", error);
+        // alert(error.message);
+        displayErrorMessage(error.message);
     }
 }
